@@ -57,7 +57,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) // CORS 규칙
                 // 인가 규칙 설정
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
-                        "/api/v1/auth/users/login")
+                        "/api/v1/auth/users/login",
+                                "/health/alive")
                         .permitAll() // 토큰 없이 접근 가능한 endPoint(= whitelist)
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // preflight 처리(모든 prelight 허용)
                         // admin으로 시작하는 url은 ADMIN의 사용자만 접근 가능하도록

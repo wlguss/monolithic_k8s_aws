@@ -8,7 +8,7 @@ on:
 
 jobs:
   # job name
-  build and deploy:
+  build-and-deploy:
     # runner 
     runs-on: ubuntu-latest
 

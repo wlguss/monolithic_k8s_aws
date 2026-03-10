@@ -44,4 +44,5 @@ jobs:
       - name: kubectl apply   # 쿠버네티스 연결 & namespace 생성은 bash에서 하기 
         run: |
           kubectl apply -f k8s/order_redis.yaml 
-          kubectl apply -f k8s/order_deployment.yaml   
+          kubectl apply -f k8s/order_deployment.yaml
+          kubectl rollout restart deployment order-deployment

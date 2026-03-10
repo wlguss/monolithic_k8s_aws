@@ -45,4 +45,5 @@ jobs:
         run: |
           kubectl apply -f k8s/order_redis.yaml 
           kubectl apply -f k8s/order_deployment.yaml
+          kubectl apply -f k8s/order_ingress.yaml 
           kubectl rollout restart deployment order-deployment -n lgcns

@@ -15,3 +15,6 @@ jobs:
     steps:
       - name: checkout github
         uses: actions/checkout@v2 
+
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3

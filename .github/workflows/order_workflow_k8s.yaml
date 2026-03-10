@@ -5,3 +5,13 @@ on:
   push:
     branches:
       - main
+
+jobs:
+  # job name
+  build and deploy:
+    # runner 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout github
+        uses: actions/checkout@v2 

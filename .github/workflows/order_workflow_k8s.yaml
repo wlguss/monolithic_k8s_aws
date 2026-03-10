@@ -1,6 +1,6 @@
 name: deploy order
 
-# main 브렌치의 코드 변경이 감지되면 아래 pipeline 동작 
+# main 브렌치의 코드 변경이 감지되면 아래 pipeline 동작 (trigger)
 on:
   push:
     branches:

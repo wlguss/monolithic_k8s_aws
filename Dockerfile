@@ -1,11 +1,20 @@
+# build stage (JDK + gradle -> jar)
 # jar 파일로 패키징하기 위한 jdk image pull
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine as builder
+WORKDIR /app
 
-# jar 파일의 위치 명시 
-ARG JAR_FILE=build/libs/*.jar
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle settings.gradle ./
 
-# copy 
-COPY ${JAR_FILE} ./backend.jar 
+RUN chmod +x gradlew
+RUN ./gradlew dependencies
 
-# run (컨테이너에서 파일 실행)
-ENTRYPOINT [ "java", "-jar", "./backend.jar" ]
+COPY src src
+RUN ./gradlew bootJar 
+# runtime stage (jre -> jar )
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+COPY --from=builder /app/build/libs/*.jar app.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]

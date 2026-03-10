@@ -32,7 +32,7 @@ jobs:
       - name: aws ecr login
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: image build and push docker image to ecr
+      - name: image build and push docker image to ecr    # ecr registry에 이미지가 생성됨 
         env: 
           REGISTRY: 933090817123.dkr.ecr.ap-south-1.amazonaws.com
           REPOSITORY: order-wlguss-backend
@@ -40,3 +40,8 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f Dockerfile . 
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+      - name: kubectl apply   # 쿠버네티스 연결 & namespace 생성은 bash에서 하기 
+        run: |
+          kubectl apply -f k8s/order_redis.yaml 
+          kubectl apply -f k8s/order_deployment.yaml   
